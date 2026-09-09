@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: 'cypress-io/cypress-realworld-app'
-        path: '../cypress-realworld-app'
+        path: 'app-source'
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -32,17 +32,11 @@ jobs:
 
     - name: Install Application Dependencies
       run: |
-        cd ../cypress-realworld-app
+        cd app-source
         corepack enable
         yarn install
 
     - name: Run Playwright tests
       run: npx playwright test
-
-    - name: Upload Playwright report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      env:
+        PLAYWRIGHT_CI_COMMAND: 'cd app-source && yarn dev'
