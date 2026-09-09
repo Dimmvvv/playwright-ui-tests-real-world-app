@@ -12,8 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout tests repository
       uses: actions/checkout@v4
+
+    - name: Checkout Cypress RWA application
+      uses: actions/checkout@v4
+      with:
+        repository: 'cypress-io/cypress-realworld-app'
+        path: '../cypress-realworld-app'
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -24,14 +30,11 @@ jobs:
     - name: Install Test Framework Dependencies
       run: npm ci
 
-    - name: Enable Corepack (Yarn)
-      run: corepack enable
-
     - name: Install Application Dependencies
       run: |
-        cd cypress-realworld-app
+        cd ../cypress-realworld-app
+        corepack enable
         yarn install
-    # ------------------------------------
 
     - name: Run Playwright tests
       run: npx playwright test
