@@ -24,10 +24,11 @@ jobs:
     - name: Install Test Framework Dependencies
       run: npm ci
 
-    - name: Install Application Dependencies
+    - name: Install & Build Application
       run: |
         cd cypress-realworld-app
-        yarn install
+        yarn install --frozen-lockfile
+        yarn build
 
     - name: Run Playwright tests
       run: npx playwright test
