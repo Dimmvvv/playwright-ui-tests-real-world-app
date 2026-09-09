@@ -74,9 +74,15 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    
+    command: 'cd ../cypress-realworld-app && yarn dev',
+    
+    // URL, по которому Playwright будет проверять, ожило ли приложение
+    url: 'http://localhost:3000',
+    
+    reuseExistingServer: !process.env.CI,
+    
+    timeout: 120 * 1000,
+  },
 });
