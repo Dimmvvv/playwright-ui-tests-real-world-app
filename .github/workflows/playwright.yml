@@ -24,10 +24,14 @@ jobs:
     - name: Install Test Framework Dependencies
       run: npm ci
 
+    - name: Enable Corepack (Yarn)
+      run: corepack enable
+
     - name: Install Application Dependencies
       run: |
         cd cypress-realworld-app
-        npm install
+        yarn install
+    # ------------------------------------
 
     - name: Run Playwright tests
       run: npx playwright test
