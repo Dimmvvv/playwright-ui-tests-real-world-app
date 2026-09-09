@@ -76,7 +76,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     
-    command: 'cd cypress-realworld-app && yarn start',
+    command: 'cd cypress-realworld-app && yarn run dev',
     
     url: 'http://localhost:3000',
     

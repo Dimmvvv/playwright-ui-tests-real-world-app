@@ -27,8 +27,8 @@ jobs:
     - name: Install & Build Application
       run: |
         cd cypress-realworld-app
-        yarn install --frozen-lockfile
-        yarn build
+        npm install -g yarn
+        yarn install
 
     - name: Run Playwright tests
       run: npx playwright test
