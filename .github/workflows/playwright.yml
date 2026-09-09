@@ -1,30 +1,40 @@
-name: Playwright Tests
+name: Playwright UI Tests
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 15
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
+        cache: 'npm'
+
+    - name: Install Test Framework Dependencies
       run: npm ci
-      - name: Install Application Dependencies
+
+    - name: Install Application Dependencies
       run: |
         cd cypress-realworld-app
         yarn install
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+
     - name: Run Playwright tests
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: playwright-report
         path: playwright-report/
