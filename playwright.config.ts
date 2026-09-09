@@ -74,14 +74,12 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    
-    command: 'cd ../cypress-realworld-app && yarn dev',
-    
-    url: 'http://localhost:3000',
-    
-    reuseExistingServer: !process.env.CI,
-    
-    timeout: 120 * 1000,
-  },
+    /* Run your local dev server before starting the tests */
+    webServer: {
+      command: process.env.PLAYWRIGHT_CI_COMMAND || 'cd ../cypress-realworld-app && yarn dev', 
+      url: 'http://localhost:3000',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
+  
 });
