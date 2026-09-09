@@ -27,8 +27,7 @@ jobs:
     - name: Install & Build Application
       run: |
         cd cypress-realworld-app
-        npm install -g yarn
-        yarn install
+        npx yarn install
 
     - name: Run Playwright tests
       run: npx playwright test
